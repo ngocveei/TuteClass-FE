@@ -181,7 +181,11 @@ export const createClassApi = {
     return withCreateClassError(async () => {
       const formData = new FormData();
       formData.append('file', file);
-      const response = await apiClient.post<UploadClassImageResponseDto>(classEndpoints.images, formData);
+      const response = await apiClient.post<UploadClassImageResponseDto>(
+        classEndpoints.images,
+        formData,
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      );
       return requireString(response.data.imageUrl, 'imageUrl');
     }, 'Không thể tải ảnh lớp lên máy chủ.');
   },

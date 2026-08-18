@@ -63,9 +63,15 @@ export function useClassStudents(): TeacherStudentListController {
     return () => window.clearTimeout(timer);
   }, [searchInput]);
   useEffect(() => {
-    if (!classes.length || requestedClassId) return;
-    setSearchParams({ classId: classes[0].classId }, { replace: true });
-  }, [classes, requestedClassId, setSearchParams]);
+    if (!teacherClasses.data || requestedClassId) return;
+    const firstClassId = classes[0]?.classId;
+    if (!firstClassId) return;
+    setSearchParams((current) => {
+      const next = new URLSearchParams(current);
+      next.set("classId", firstClassId);
+      return next;
+    }, { replace: true });
+  }, [classes, requestedClassId, setSearchParams, teacherClasses.data]);
   useEffect(() => {
     if (!isClassDrawerOpen) return undefined;
     const closeOnEscape = (event: KeyboardEvent) => {

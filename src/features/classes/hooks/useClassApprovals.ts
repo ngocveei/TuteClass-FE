@@ -1,19 +1,18 @@
 import { message } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useTeacherClasses } from './useTeacherClasses';
 import { JoinRequestsApiError } from '../types/classApproval.errors';
 import type {
   JoinRequestsFlowController,
   JoinRequestsQuery,
   JoinRequestsSortOption,
-  TeacherClassDrawerItem,
 } from '../types/classApproval.types';
 import {
   useApproveJoinRequestMutation,
   useJoinRequestsQuery,
   useRejectJoinRequestMutation,
 } from './useClassApprovalsQueries';
+import { teacherOverviewPath } from '@/shared/constants/routes';
 
 export function useClassApprovals(classId: string | undefined): JoinRequestsFlowController {
   const navigate = useNavigate();
@@ -26,37 +25,10 @@ export function useClassApprovals(classId: string | undefined): JoinRequestsFlow
   const [page, setPage] = useState(1);
   const pageSize = 20;
 
-  const [isClassDrawerOpen, setIsClassDrawerOpen] = useState(false);
   const [processingStudentIds, setProcessingStudentIds] = useState<Set<string>>(new Set());
   const [actionResults, setActionResults] = useState<
     Map<string, { status: 'Active' | 'Rejected'; updatedAt: string }>
   >(new Map());
-
-  const teacherClassesQuery = useTeacherClasses();
-
-  const classList: TeacherClassDrawerItem[] = useMemo(() => {
-    if (teacherClassesQuery.data && teacherClassesQuery.data.length > 0) {
-      return teacherClassesQuery.data.map((c) => ({
-        id: c.classId,
-        name: c.className,
-        teacherName: 'Giáo viên',
-        studentCount: c.studentCount,
-        tone: c.tone,
-      }));
-    }
-    return [];
-  }, [teacherClassesQuery.data]);
-
-  useEffect(() => {
-    if (!isClassDrawerOpen) return undefined;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsClassDrawerOpen(false);
-      }
-    };
-    window.addEventListener('keydown', closeOnEscape);
-    return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [isClassDrawerOpen]);
 
   const queryParams: JoinRequestsQuery = useMemo(
     () => {
@@ -86,8 +58,7 @@ export function useClassApprovals(classId: string | undefined): JoinRequestsFlow
   const { data, isLoading, isError, error, refetch } = useJoinRequestsQuery(queryParams);
 
   const locationClassName = (location.state as { className?: string } | null)?.className;
-  const selectedClass = classList.find((c: TeacherClassDrawerItem) => c.id === safeClassId);
-  const resolvedClassName = data?.className || locationClassName || selectedClass?.name || '';
+  const resolvedClassName = data?.className || locationClassName || '';
 
   const approveMutation = useApproveJoinRequestMutation();
   const rejectMutation = useRejectJoinRequestMutation();
@@ -168,18 +139,9 @@ export function useClassApprovals(classId: string | undefined): JoinRequestsFlow
       : 'Không thể tải danh sách yêu cầu tham gia.'
     : null;
 
-  const selectClass = (targetClassId: string, targetClassName: string) => {
-    setIsClassDrawerOpen(false);
-    navigate(`/classes/${encodeURIComponent(targetClassId)}/approval-requests`, {
-      state: { className: targetClassName },
-    });
-  };
-
   return {
     classId: safeClassId,
     className: resolvedClassName,
-    classList,
-    isClassDrawerOpen,
     items,
     totalCount: data?.totalCount || 0,
     page: data?.page || page,
@@ -192,9 +154,6 @@ export function useClassApprovals(classId: string | undefined): JoinRequestsFlow
     errorMessage,
     processingStudentIds,
     messageContextHolder,
-    openClassDrawer: () => setIsClassDrawerOpen(true),
-    closeClassDrawer: () => setIsClassDrawerOpen(false),
-    selectClass,
     setSearchTerm,
     setStatusFilter: (value) => { setStatusFilter(value); setPage(1); },
     setSortOption: (value) => { setSortOption(value); setPage(1); },
@@ -202,6 +161,6 @@ export function useClassApprovals(classId: string | undefined): JoinRequestsFlow
     handleApprove,
     handleReject,
     handleRefetch: () => void refetch(),
-    goBack: () => navigate('/classes'),
+    goBack: () => navigate(teacherOverviewPath(safeClassId)),
   };
 }

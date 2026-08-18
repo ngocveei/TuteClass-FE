@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { googleLogin } from "@/features/auth/api/auth.api";
 import { loadGoogleIdentity } from "@/features/auth/services/googleIdentityService";
@@ -23,6 +24,7 @@ export function useGoogleAuth({
   const roleRef = useRef(role);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim();
   roleRef.current = role;
 
@@ -42,6 +44,7 @@ export function useGoogleAuth({
               onError("Google không trả về ID token hợp lệ.");
               return;
             }
+            queryClient.clear();
             void googleLogin(credential, roleRef.current)
               .then((result) => {
                 const home: Record<string, string> = {
@@ -61,7 +64,7 @@ export function useGoogleAuth({
           theme: "outline",
           size: "large",
           type: "standard",
-          shape: "rectangular",
+          shape: "pill",
           text: mode === "register" ? "signup_with" : "signin_with",
           width: containerRef.current.offsetWidth || 360,
           locale: "vi",
@@ -77,7 +80,7 @@ export function useGoogleAuth({
     return () => {
       active = false;
     };
-  }, [clientId, disabled, mode, navigate, onError]);
+  }, [clientId, disabled, mode, navigate, onError, queryClient]);
 
   return { containerRef, loading, clientIdMissing: !clientId };
 }

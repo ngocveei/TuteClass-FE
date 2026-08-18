@@ -20,7 +20,7 @@ export const publicRoutes: RouteObject[] = [
   {
     element: <AuthLayout />,
     children: [
-      { index: true, element: <LandingPage /> },
+      { index: true, element: guest(<LandingPage />) },
       { path: '/login', element: guest(<LoginPage />) },
       { path: '/register', element: guest(<RegisterPage />) },
       { path: '/register/check-email', element: guest(<CheckEmailPage />) },

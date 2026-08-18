@@ -19,6 +19,36 @@
 .teacher-student-list__header > div:first-child { display: block; }
 .teacher-student-list__header h1 { margin: 0; font-size: 27px; line-height: 1.2; }
 .teacher-student-list__header p { margin: 5px 0 0; color: #58718f; font-size: 14px; }
+.teacher-student-list .teacher-overview-title-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  color: #073d7b;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+.teacher-student-list .teacher-overview-title-switch h1 {
+  margin: 0;
+  font-family: var(--tc-font-heading, "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, sans-serif);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.teacher-student-list .teacher-overview-title-switch h1 strong { color: #ff5d13; }
+.teacher-student-list .teacher-overview-title-chevron {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  flex: none;
+  border: 1px solid #efd8b6;
+  border-radius: 10px;
+  color: #5a4a47;
+}
+.teacher-student-list .teacher-overview-title-chevron svg { width: 18px; height: 18px; }
 .teacher-student-list__actions,
 .teacher-student-list__toolbar,
 .teacher-student-list__pagination { display: flex; align-items: center; gap: 10px; }

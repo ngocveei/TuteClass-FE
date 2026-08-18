@@ -73,19 +73,9 @@ export interface JoinRequestsQuery {
 
 export type JoinRequestsSortOption = 'newest' | 'oldest';
 
-export interface TeacherClassDrawerItem {
-  id: string;
-  name: string;
-  teacherName: string;
-  studentCount: number;
-  tone: 'green' | 'amber' | 'blue' | 'rose' | 'violet';
-}
-
 export interface JoinRequestsFlowController {
   classId: string;
   className: string;
-  classList: TeacherClassDrawerItem[];
-  isClassDrawerOpen: boolean;
   items: JoinRequestRow[];
   totalCount: number;
   page: number;
@@ -98,9 +88,6 @@ export interface JoinRequestsFlowController {
   errorMessage: string | null;
   processingStudentIds: Set<string>;
   messageContextHolder: ReactElement;
-  openClassDrawer: () => void;
-  closeClassDrawer: () => void;
-  selectClass: (classId: string, className: string) => void;
   setSearchTerm: (value: string) => void;
   setStatusFilter: (value: string) => void;
   setSortOption: (value: JoinRequestsSortOption) => void;

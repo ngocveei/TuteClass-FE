@@ -4,11 +4,11 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { ROUTES, teacherOverviewPath } from '@/shared/constants/routes'
 import { TeacherWorkspaceIcon } from '@/shared/layouts/TeacherLayout/TeacherWorkspaceIcon'
 
-function DockItem({ label, icon, to }: { label: string; icon: ReactNode; to?: string }) {
+function DockItem({ label, icon, to, end = false }: { label: string; icon: ReactNode; to?: string; end?: boolean }) {
   if (!to) {
     return <button type="button" className="teacher-workspace-dock__item" disabled title="Đang phát triển">{icon}<span>{label}</span></button>
   }
-  return <NavLink to={to} className={({ isActive }) => `teacher-workspace-dock__item${isActive ? ' is-active' : ''}`} title={label}>{icon}<span>{label}</span></NavLink>
+  return <NavLink to={to} end={end} className={({ isActive }) => `teacher-workspace-dock__item${isActive ? ' is-active' : ''}`} title={label}>{icon}<span>{label}</span></NavLink>
 }
 
 export function TeacherWorkspaceDock() {
@@ -37,7 +37,7 @@ export function TeacherWorkspaceDock() {
           <path d="M 56 0 L 468 0 A 26 26 0 0 1 494 26 A 30 30 0 0 0 524 56 L 0 56 A 30 30 0 0 0 30 26 A 26 26 0 0 1 56 0 Z" />
         </svg>
         <nav className="teacher-workspace-dock__nav" aria-label="Điều hướng nhanh giáo viên">
-          <DockItem label="Tổng quan" icon={<TeacherWorkspaceIcon name="grid" />} to={overviewPath} />
+          <DockItem label="Tổng quan" icon={<TeacherWorkspaceIcon name="grid" />} to={overviewPath} end />
           <DockItem label="Lịch dạy" icon={<TeacherWorkspaceIcon name="calendar" />} />
           <DockItem label="Học viên" icon={<TeacherWorkspaceIcon name="people" />} to={studentsPath} />
           <DockItem label="Học phí" icon={<TeacherWorkspaceIcon name="card" />} to={ROUTES.teacherTuition} />

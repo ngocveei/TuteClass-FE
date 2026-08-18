@@ -1,15 +1,12 @@
 import {
   ArrowLeftOutlined,
-  DownOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import {
   Alert,
-  Dropdown,
   Input,
   Pagination,
   Select,
-  type MenuProps,
 } from "antd";
 import { JoinRequestList } from "@/features/classes/components/approvals/JoinRequestList";
 import type { JoinRequestsFlowController } from "@/features/classes/types/classApproval.types";
@@ -35,12 +32,6 @@ function resultSummary(
 export function ClassApprovalRequestsScreen({
   flow,
 }: ClassApprovalRequestsScreenProps) {
-  const menuItems: MenuProps["items"] = flow.classList.map((cls) => ({
-    key: cls.id,
-    label: cls.name,
-    onClick: () => flow.selectClass(cls.id, cls.name),
-  }));
-
   return (
     <main
       className="teacher-approvals-page"
@@ -53,23 +44,9 @@ export function ClassApprovalRequestsScreen({
           <div className="teacher-approvals-header-left">
             <h1 className="teacher-approvals-title">
               <span>Quản lý yêu cầu theo lớp</span>
-              <Dropdown
-                menu={{
-                  items: menuItems,
-                  selectedKeys: [flow.classId],
-                }}
-                trigger={["click"]}
-                overlayClassName="student-class-dropdown-menu"
-              >
-                <span className="student-page-title-class-trigger">
-                  <span className="student-class-name-orange">
-                    {flow.className}
-                  </span>
-                  <span className="student-title-chev-box">
-                    <DownOutlined className="student-title-chev" />
-                  </span>
-                </span>
-              </Dropdown>
+              <span className="teacher-approvals-class-name">
+                {flow.className}
+              </span>
             </h1>
           </div>
 

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint src tests",
-    "test": "vitest run tests/architecture.test.ts && vitest run tests/auth.api.test.ts && vitest run tests/classes.api.test.ts && vitest run tests/guards.test.tsx && vitest run tests/teacher-states.test.tsx",
+    "test": "vitest run tests/architecture.test.ts && vitest run tests/auth.api.test.ts && vitest run tests/classes.api.test.ts && vitest run tests/guards.test.tsx && vitest run tests/session-cache.test.tsx && vitest run tests/teacher-states.test.tsx && vitest run tests/approval-flow.test.tsx",
     "test:watch": "vitest",
     "preview": "vite preview"
   },

@@ -7,46 +7,10 @@
   color: #0b2f66;
 }
 
-.teacher-approvals-page .student-page-title-class-trigger {
-  display: inline-flex;
-  align-items: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  user-select: none;
-  transition: opacity 0.2s ease;
-}
-
-.teacher-approvals-page .student-class-name-orange {
+.teacher-approvals-class-name {
   margin-left: 8px;
   color: #ff5c00;
   font-size: 26px;
-  font-weight: 800;
-}
-
-.teacher-approvals-page .student-title-chev-box {
-  display: inline-flex;
-  width: 32px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  border: 1px solid #ffd59e;
-  border-radius: 9px;
-  background: #fff0e2;
-  transition: all 0.2s ease;
-}
-
-.teacher-approvals-page .student-title-chev-box:hover {
-  border-color: #ffb870;
-  background: #ffe3ca;
-  transform: translateY(-1px);
-}
-
-.teacher-approvals-page .student-title-chev {
-  color: #ff5c00;
-  font-size: 14px;
   font-weight: 800;
 }
 

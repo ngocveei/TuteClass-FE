@@ -20,6 +20,22 @@ describe('Teacher classes API mapping', () => {
     await expect(createClassApi.getOptions()).resolves.toEqual({ subjects: [{ subjectId: 'math', subjectName: 'Toán' }], gradeLevels: [{ value: 'Grade10', label: '10', displayLabel: 'Lớp 10' }] })
   })
 
+  it('uploads class images as multipart data with a file field', async () => {
+    server.use(http.post(`${api}/api/classes/images`, async ({ request }) => {
+      expect(request.headers.get('content-type')).toMatch(/^multipart\/form-data/)
+      const formData = await request.formData()
+      const uploadedFile = formData.get('file')
+      expect(uploadedFile).not.toBeNull()
+      expect(typeof uploadedFile).not.toBe('string')
+      if (!uploadedFile || typeof uploadedFile === 'string') throw new Error('Missing file upload field.')
+      expect(uploadedFile).toMatchObject({ size: 5, type: 'image/png' })
+      return HttpResponse.json({ imageUrl: '/uploads/classes/class-image.png' })
+    }))
+
+    await expect(createClassApi.uploadImage(new File(['image'], 'class-image.png', { type: 'image/png' })))
+      .resolves.toBe('/uploads/classes/class-image.png')
+  })
+
   it('maps pending approvals from backend identity data', async () => {
     server.use(http.get(`${api}/api/classes/class-1/join-requests`, () => HttpResponse.json({
       classId: 'class-1', className: 'Toán 10', page: 1, pageSize: 20, totalCount: 1,

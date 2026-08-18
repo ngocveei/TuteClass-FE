@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login } from "@/features/auth/api/auth.api";
@@ -15,9 +15,13 @@ export function useLogin() {
   const [externalError, setExternalError] = useState<string>();
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
   const returnTo = new URLSearchParams(location.search).get("returnTo");
   const mutation = useMutation({
     mutationFn: login,
+    onMutate: () => {
+      queryClient.clear();
+    },
     onSuccess: (result) => {
       const requested =
         (location.state as { from?: { pathname?: string } } | null)?.from

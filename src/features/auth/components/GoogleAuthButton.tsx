@@ -30,7 +30,7 @@ export function GoogleAuthButton(props: GoogleAuthButtonProps) {
   }
 
   return (
-    <div className="google-button-wrap">
+    <div className={`google-button-wrap google-button-wrap--${props.mode}`}>
       <div ref={google.containerRef} className="google-identity-button" />
       {google.loading && (
         <button

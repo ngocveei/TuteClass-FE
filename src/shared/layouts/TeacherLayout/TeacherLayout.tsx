@@ -8,9 +8,9 @@ import { TeacherWorkspaceDock } from '@/shared/layouts/TeacherLayout/TeacherWork
 import { TeacherWorkspaceIcon } from '@/shared/layouts/TeacherLayout/TeacherWorkspaceIcon'
 import '@/shared/layouts/TeacherLayout/teacher-workspace.css'
 
-function TeacherTopbarItem({ label, icon, to }: { label: string; icon: ReactNode; to?: string }) {
+function TeacherTopbarItem({ label, icon, to, end = false }: { label: string; icon: ReactNode; to?: string; end?: boolean }) {
   if (!to) return <button type="button" className="teacher-workspace__nav-link" disabled title="Đang phát triển">{icon}<span>{label}</span></button>
-  return <NavLink to={to} className={({ isActive }) => `teacher-workspace__nav-link${isActive ? ' is-active' : ''}`}>{icon}<span>{label}</span></NavLink>
+  return <NavLink to={to} end={end} className={({ isActive }) => `teacher-workspace__nav-link${isActive ? ' is-active' : ''}`}>{icon}<span>{label}</span></NavLink>
 }
 
 export function TeacherLayout() {
@@ -29,7 +29,7 @@ export function TeacherLayout() {
           <img src="/assets/lam/logo-rmbg.png" alt="TuteClass" />
         </NavLink>
         <nav className="teacher-workspace__nav" aria-label="Điều hướng giáo viên">
-          <TeacherTopbarItem label="Trang chủ" icon={<TeacherWorkspaceIcon name="home" />} to={overviewPath} />
+          <TeacherTopbarItem label="Trang chủ" icon={<TeacherWorkspaceIcon name="home" />} to={overviewPath} end />
           <TeacherTopbarItem label="Lịch" icon={<TeacherWorkspaceIcon name="calendar" />} />
           <TeacherTopbarItem label="Học viên" icon={<TeacherWorkspaceIcon name="people" />} to={studentsPath} />
           <TeacherTopbarItem label="Bài tập" icon={<TeacherWorkspaceIcon name="file" />} />
