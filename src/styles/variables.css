@@ -6,10 +6,20 @@
   --color-border: #e5e7eb;
   --color-text: #1f2937;
   --tc-color-paper: #fffaf1;
+  --tc-color-paper-warm: #fff3df;
+  --tc-color-surface: #ffffff;
   --tc-color-ink: #0b2f66;
+  --tc-color-copy: #334155;
+  --tc-color-muted: #64748b;
   --tc-color-accent: #ff5c00;
+  --tc-color-accent-hover: #e75200;
   --tc-color-sky: #2f7cff;
   --tc-color-mint: #3b826f;
   --tc-color-border: #ecd9bd;
+  --tc-color-border-soft: #e7e2d8;
+  --tc-radius-card: 8px;
+  --tc-radius-control: 12px;
+  --tc-shadow-card: 0 16px 40px rgb(15 23 42 / 0.08);
+  --tc-shadow-auth: 0 24px 70px rgb(11 47 102 / 13%);
   --content-max-width: 1280px;
 }

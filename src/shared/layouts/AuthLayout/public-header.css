@@ -1,0 +1,109 @@
+.auth-layout {
+  width: 100vw;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: var(--tc-color-paper-warm);
+}
+
+.auth-layout .public-nav {
+  position: relative;
+  z-index: 150;
+  height: 74px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #ecd9bd;
+  background: #fff8ea;
+}
+
+.auth-layout .public-nav__inner {
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+  margin: 0 auto;
+  padding: 16px 32px;
+}
+
+.auth-layout .public-brand img {
+  display: block;
+  width: auto;
+  height: 34px;
+  object-fit: contain;
+}
+
+.auth-layout .public-nav nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.auth-layout .public-nav nav a {
+  color: #0b2f66;
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.18s;
+}
+
+.auth-layout .public-nav nav a:hover {
+  color: #ff5c00;
+}
+
+.auth-layout .public-nav__inner > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth-layout .public-nav__inner > div > a {
+  color: #0b2f66;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-layout .public-nav .public-nav__cta {
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: #fff;
+  background: #0b2f66;
+  box-shadow: 0 12px 28px rgb(11 47 102 / 20%);
+  font-weight: 800;
+  transition: 0.18s;
+}
+
+.auth-layout .public-nav .public-nav__cta:hover {
+  color: #fff;
+  background: #ff5c00;
+  box-shadow: 0 16px 32px rgb(255 92 0 / 24%);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 680px) {
+  .auth-layout .public-nav {
+    height: 54px;
+  }
+
+  .auth-layout .public-nav__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .auth-layout .public-nav nav,
+  .auth-layout .public-nav .public-nav__cta,
+  .auth-layout .public-nav__inner > div > a:first-child {
+    display: none;
+  }
+
+  .auth-layout .public-brand img {
+    width: auto;
+    max-width: 138px;
+    height: 29px;
+  }
+
+  .auth-layout .public-nav__inner > div {
+    gap: 8px;
+  }
+}

@@ -1,5 +1,0 @@
-import { PlusOutlined, TeamOutlined } from '@ant-design/icons'
-import { Alert, Skeleton } from 'antd'
-import { Link, useLocation } from 'react-router-dom'
-import { useClasses } from '@/features/classes/hooks/useClasses'
-export function ClassSidebar(){const query=useClasses();const location=useLocation();return <aside className="class-sidebar"><header><h2>Lớp của tôi</h2><Link to="/classes"><PlusOutlined/></Link></header><div className="class-sidebar-list">{query.isLoading?<Skeleton active paragraph={{rows:4}}/>:query.isError?<Alert type="error" message="Không thể tải lớp"/>:query.data?.length?query.data.map((item)=><Link key={item.id} to={`/classes/${item.id}`} className={location.pathname.endsWith(item.id)?'active':''}><span className="class-color"/><span><b>{item.name}</b><small><TeamOutlined/> {item.studentCount} học sinh</small></span></Link>):<p className="class-sidebar-empty">Bạn chưa có lớp nào.</p>}</div><Link to="/classes" className="class-sidebar-all">Xem tất cả lớp</Link></aside>}

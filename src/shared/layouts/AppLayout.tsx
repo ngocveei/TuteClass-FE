@@ -1,9 +1,8 @@
 import { BookOutlined, LogoutOutlined } from '@ant-design/icons'
 import { Button, Layout, Menu, Typography } from 'antd'
 import type { ItemType } from 'antd/es/menu/interface'
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { getTokens, removeTokens } from '@/services/auth/tokenStorage'
-import { apiClient } from '@/services/api/apiClient'
+import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useSessionControls } from '@/features/auth'
 import { WorkspaceLayout } from '@/shared/layouts/AppLayout/WorkspaceLayout'
 
 interface AppLayoutProps {
@@ -14,20 +13,9 @@ interface AppLayoutProps {
 
 export function AppLayout({ menuItems, homePath, roleLabel }: AppLayoutProps) {
   const location = useLocation()
-  const navigate = useNavigate()
+  const session = useSessionControls()
 
-  const logout = async () => {
-    const refreshToken = getTokens()?.refreshToken
-    if (refreshToken) {
-      try {
-        await apiClient.post('/api/auth/logout', { refreshToken })
-      } catch {
-        // Local logout must still work if the API is unavailable.
-      }
-    }
-    removeTokens()
-    navigate('/login', { replace: true })
-  }
+  const logout = session.signOut
 
   if (homePath.startsWith('/student')) return <WorkspaceLayout role="student" />
   if (homePath === '/classes') return <WorkspaceLayout role="teacher" />
