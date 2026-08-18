@@ -1,0 +1,155 @@
+.auth-split--register {
+  grid-template-columns: 42% 58%;
+  width: min(900px, 94vw);
+  height: min(620px, calc(100dvh - 96px));
+  min-height: 560px;
+}
+
+.auth-split--register .auth-visual {
+  position: relative;
+  padding: 25px 28px 18px;
+  background: #fff8ee;
+}
+
+.auth-split--register .auth-visual::after {
+  position: absolute;
+  right: -55px;
+  bottom: -72px;
+  width: 165px;
+  height: 165px;
+  border: 25px solid rgba(255, 92, 0, 0.06);
+  border-radius: 50%;
+  content: '';
+}
+
+.auth-split--register .auth-visual > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-split--register .auth-visual h1 {
+  font-size: 1.55rem;
+  letter-spacing: -0.035em;
+}
+
+.auth-split--register .auth-visual p {
+  max-width: 290px;
+  margin-bottom: 4px;
+  font-size: 0.76rem;
+}
+
+.auth-split--register .auth-visual img {
+  width: 100%;
+  height: 175px;
+  margin: 3px auto 10px;
+  filter: drop-shadow(0 12px 16px rgba(11, 47, 102, 0.08));
+}
+
+.auth-split--register .auth-feature-grid {
+  gap: 8px;
+}
+
+.auth-split--register .auth-feature-grid > div {
+  min-height: 67px;
+  padding: 7px 4px;
+  border-radius: 10px;
+  box-shadow: 0 5px 14px rgba(11, 47, 102, 0.04);
+}
+
+.auth-split--register .auth-feature-grid b {
+  width: 27px;
+  height: 27px;
+}
+
+.auth-split--register .auth-visual footer {
+  margin-top: 8px;
+}
+
+.auth-split--register .auth-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 18px 34px;
+}
+
+.auth-split--register .auth-back {
+  margin-bottom: 7px;
+}
+
+.auth-split--register .auth-form-panel h2 {
+  font-size: 1.55rem;
+}
+
+.auth-split--register .auth-form-panel > p {
+  margin: 3px 0 9px;
+  font-size: 0.75rem;
+}
+
+.auth-split--register .auth-roles {
+  margin-bottom: 7px;
+}
+
+.auth-split--register .auth-roles button {
+  height: 35px;
+  padding: 6px 10px;
+}
+
+.auth-split--register .ant-form-item {
+  margin-bottom: 5px;
+}
+
+.auth-split--register .ant-form-item-label {
+  padding-bottom: 1px;
+}
+
+.auth-split--register .ant-form-item-label label {
+  font-size: 0.7rem;
+}
+
+.auth-split--register .ant-input,
+.auth-split--register .ant-input-affix-wrapper {
+  min-height: 31px;
+  padding-block: 3px;
+  font-size: 0.75rem;
+}
+
+.auth-split--register .ant-form-item-extra,
+.auth-split--register .ant-checkbox-wrapper {
+  min-height: 0;
+  font-size: 0.61rem;
+  line-height: 1.25;
+}
+
+.auth-split--register .ant-form-item-explain {
+  font-size: 0.65rem;
+}
+
+.auth-split--register .ant-btn-primary {
+  height: 35px;
+  font-size: 0.76rem;
+}
+
+.auth-split--register .auth-divider {
+  margin: 5px 0;
+}
+
+.auth-split--register .google-button-wrap,
+.auth-split--register .google-button-wrap > div,
+.auth-split--register .google-fallback {
+  min-height: 34px;
+  height: 34px;
+}
+
+@media (max-width: 760px) {
+  .auth-split--register {
+    width: min(540px, 100%);
+    height: auto;
+    min-height: 0;
+  }
+
+  .auth-split--register .auth-form-panel {
+    overflow: visible;
+    padding: 22px 20px;
+  }
+}
