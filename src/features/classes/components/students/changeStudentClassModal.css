@@ -1,0 +1,213 @@
+.change-class-modal {
+  top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 auto !important;
+}
+
+.change-class-modal .ant-modal-content {
+  border-radius: 20px;
+  padding: 24px 28px;
+  background: #fffaf1;
+  box-shadow: 0 20px 50px -10px rgba(7, 61, 123, 0.22);
+}
+
+.change-class-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.change-class-modal__header-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: #fff0eb;
+  color: #ff5d13;
+  font-size: 20px;
+}
+
+.change-class-modal__header h2 {
+  margin: 0;
+  color: #073d7b;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.change-class-modal__header p {
+  margin: 2px 0 0;
+  color: #647895;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.change-class-modal__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.change-class-modal__student-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #f1e4d3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.change-class-modal__student-avatar {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: #073d7b;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+.change-class-modal__student-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.change-class-modal__student-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.change-class-modal__student-info strong {
+  color: #1e2a3a;
+  font-size: 16px;
+}
+
+.change-class-modal__student-info small {
+  color: #647895;
+  font-size: 13px;
+}
+
+.change-class-modal__current-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.change-class-modal__current-tag span {
+  font-size: 12px;
+  color: #8fa0b5;
+}
+
+.change-class-modal__current-tag strong {
+  font-size: 14px;
+  color: #ff5d13;
+}
+
+.change-class-modal__section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.change-class-modal__section-title span {
+  font-weight: 700;
+  color: #073d7b;
+  font-size: 15px;
+}
+
+.change-class-modal__section-title small {
+  color: #7b8fa7;
+  font-size: 13px;
+}
+
+.change-class-modal__alert {
+  border-radius: 10px;
+}
+
+.change-class-modal__empty {
+  padding: 24px;
+  text-align: center;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #647895;
+  border: 1px dashed #d9e3f0;
+}
+
+.change-class-modal__class-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px 4px 12px;
+}
+
+.change-class-modal .teacher-overview-class-card {
+  min-height: 104px;
+  padding: 16px 18px 14px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.change-class-modal .teacher-overview-class-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(7, 61, 123, 0.12);
+}
+
+.change-class-modal .teacher-overview-class-card.is-selected {
+  outline: none !important;
+  border-color: #ff5d13 !important;
+  box-shadow: 0 6px 20px rgba(255, 93, 19, 0.22) !important;
+}
+
+.change-class-modal .teacher-overview-class-card.is-incompatible {
+  opacity: 0.65;
+  filter: grayscale(0.2);
+}
+
+.change-class-modal__selected-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #ff5d13;
+  z-index: 5;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.change-class-modal__confirm-btn {
+  background: #ff5d13 !important;
+  border-color: #ff5d13 !important;
+  font-weight: 600;
+}
+
+.change-class-modal__confirm-btn:hover {
+  background: #e04e0b !important;
+  border-color: #e04e0b !important;
+}
+
+.change-class-modal__overlay-loading {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 250, 241, 0.7);
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  z-index: 10;
+}
+

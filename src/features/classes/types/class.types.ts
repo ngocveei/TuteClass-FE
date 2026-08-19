@@ -1,30 +1,29 @@
-export type ClassStatus = 'Active' | 'Completed'
+export interface TeacherClassMineDto {
+  readonly classId?: string;
+  readonly className?: string | null;
+  readonly imageUrl?: string | null;
+  readonly pendingApprovalCount?: number;
+  readonly status?: string | null;
+  readonly studentCount?: number;
+}
+export type TeacherClassTone = 'amber' | 'blue' | 'rose' | 'violet';
+export type ClassStatusFilter = 'All' | 'Active' | 'Completed';
+export type TeacherClassStatus = Exclude<ClassStatusFilter, 'All'>;
 
-export interface Class {
-  id: string
-  name: string
-  description?: string
-  studentCount: number
-  status: ClassStatus
-  createdAt?: string
-  pendingApprovalCount?: number
-  imageUrl?: string
+export interface TeacherOwnedClass {
+  classId: string;
+  className: string;
+  studentCount: number;
+  imageUrl: string | null;
+  status: TeacherClassStatus;
+  tone: TeacherClassTone;
 }
 
-export interface CreateClassRequest {
-  className: string
-  subjectId: string
-  gradeLevel: string
-  description?: string
-}
-
-export interface CreateClassOptions {
-  subjects: Array<{ subjectId: string; subjectName: string }>
-  gradeLevels: Array<{ value: string; label: string }>
-}
-
-export interface UpdateClassRequest {
-  name?: string
-  description?: string
-  status?: ClassStatus
+export interface TeacherClassFilterController {
+  status: ClassStatusFilter;
+  classes: TeacherOwnedClass[];
+  isLoading: boolean;
+  error: Error | null;
+  cycleStatus: () => void;
+  retry: () => void;
 }

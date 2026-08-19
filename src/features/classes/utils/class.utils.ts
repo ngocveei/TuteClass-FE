@@ -1,16 +1,19 @@
-import type { Class, ClassStatus } from '@/features/classes/types/class.types'
+export function formatClassDateTime(isoString: string) {
+  const date = new Date(isoString)
+  if (Number.isNaN(date.getTime())) return isoString
 
-const statusLabels: Record<string, string> = {
-  Completed: 'Đã hoàn thành',
-  Active: 'Đang hoạt động',
-  Inactive: 'Tạm ngưng',
-  Archived: 'Đã lưu trữ',
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const year = date.getFullYear()
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  return `${day}/${month}/${year} ${hours}:${minutes}`
 }
 
-export function getClassStatusText(status: ClassStatus): string {
-  return statusLabels[status] ?? status
-}
-
-export function isClassFull(classItem: Class, capacity = 30): boolean {
-  return classItem.studentCount >= capacity
+export function formatClassJoinedDate(value: string) {
+  return new Intl.DateTimeFormat('vi-VN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).format(new Date(value))
 }

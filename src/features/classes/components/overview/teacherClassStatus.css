@@ -1,0 +1,102 @@
+.teacher-overview-drawer header button > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.teacher-overview-class-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'details status'
+    'details image';
+  min-height: 146px;
+  gap: 12px 14px;
+  padding: 25px 24px;
+}
+
+.teacher-overview-class-card.teacher-overview-class-card--with-image {
+  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-rows: auto 55px;
+  min-height: 146px;
+  gap: 8px 14px;
+  padding-block: 16px;
+}
+
+.teacher-overview-class-card--with-image .teacher-overview-class-card__details {
+  align-content: end;
+}
+
+.teacher-overview-class-card__details {
+  grid-area: details;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.teacher-overview-class-card .teacher-overview-class-card__details small {
+  margin-top: 0;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status {
+  grid-area: status;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: end;
+  align-self: start;
+  width: auto;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status::before {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  content: '';
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status--active {
+  color: #087747;
+  border-color: #c7efd6;
+  background: #e7f9ee;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status--active::before {
+  background: #16a65c;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status--completed {
+  color: #72541c;
+  border-color: #f1dbaf;
+  background: #fff2d6;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__status--completed::before {
+  background: #d18a18;
+}
+
+.teacher-overview-class-card > .teacher-overview-class-card__image {
+  grid-area: image;
+  position: static;
+  justify-self: center;
+  align-self: end;
+  width: 83px;
+  height: 55px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.teacher-overview-class-list > .teacher-overview-add-class {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+

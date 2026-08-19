@@ -61,3 +61,7 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# Local sibling repositories
+BackEnd/
+FE/
