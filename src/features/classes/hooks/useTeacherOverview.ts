@@ -67,16 +67,12 @@ export function useTeacherOverview(): TeacherOverviewFlowController {
   }, [invitationQuery.data, invitationQuery.isError, invitationQuery.isLoading, selectedClass]);
 
   useEffect(() => {
-    if (!teacherClasses.data) return;
+    if (!teacherClasses.data || requestedClassId) return;
     const firstClassId = teacherClasses.data[0]?.classId;
-    const hasRequestedClass = teacherClasses.data.some(
-      (item) => item.classId === requestedClassId,
-    );
-    if (hasRequestedClass || (!requestedClassId && !firstClassId)) return;
+    if (!firstClassId) return;
     setSearchParams((current) => {
       const next = new URLSearchParams(current);
-      if (firstClassId) next.set('classId', firstClassId);
-      else next.delete('classId');
+      next.set('classId', firstClassId);
       return next;
     }, { replace: true });
   }, [requestedClassId, setSearchParams, teacherClasses.data]);

@@ -36,13 +36,17 @@ export function useJoinRequestsQuery(query: JoinRequestsQuery) {
 }
 
 /**
- * The Backend returns only pending join requests from this endpoint.  Fetching
- * one item is therefore enough for consumers that only need the pending count.
+ * Fetch one pending request only to obtain the number awaiting approval.
  */
 export function usePendingJoinRequestsCountQuery(classId: string | null | undefined) {
   return useQuery({
-    queryKey: joinRequestsQueryKey(classId ?? '', undefined, undefined, 1, 1),
-    queryFn: () => joinRequestsApi.getJoinRequests({ classId: classId!, page: 1, pageSize: 1 }),
+    queryKey: joinRequestsQueryKey(classId ?? '', undefined, 'Pending', 1, 1),
+    queryFn: () => joinRequestsApi.getJoinRequests({
+      classId: classId!,
+      status: 'Pending',
+      page: 1,
+      pageSize: 1,
+    }),
     enabled: Boolean(classId),
   });
 }

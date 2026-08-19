@@ -7,6 +7,7 @@ import { getMyProfile } from '@/features/profile';
 import { createLogger, createOperationId } from '@/services/logger';
 import { teacherClassKeys } from '@/features/classes/hooks/teacherClassKeys';
 import { APP_ROUTES, teacherOverviewPath } from '../../../shared/constants/routes';
+import { teacherClassesApi } from '../api/classes.api';
 import type {
   ClassInvitation,
   CreateClassEditableField,
@@ -16,6 +17,7 @@ import type {
   CreateClassValidationErrors,
 } from '../types/classCreate.types';
 import { CreateClassApiError } from '../types/classCreate.errors';
+import type { TeacherOwnedClass } from '../types/class.types';
 import {
   clearCreateClassDraft,
   clearLastCreatedClass,
@@ -256,6 +258,26 @@ export function useCreateClassFlow(): CreateClassFlowController {
           allowFeedActivity: !normalized.disableFeed,
         },
       });
+      queryClient.setQueryData<TeacherOwnedClass[]>(
+        teacherClassKeys.mine(),
+        (current) => {
+          if (!current || current.some((item) => item.classId === result.classId)) {
+            return current;
+          }
+          const tones: TeacherOwnedClass['tone'][] = ['amber', 'blue', 'rose', 'violet'];
+          return [
+            ...current,
+            {
+              classId: result.classId,
+              className: result.className,
+              studentCount: 0,
+              imageUrl: result.imageUrl,
+              status: result.status === 'Completed' ? 'Completed' : 'Active',
+              tone: tones[current.length % tones.length],
+            },
+          ];
+        },
+      );
 
       let invitation: ClassInvitation | null = null;
       try {
@@ -317,14 +339,24 @@ export function useCreateClassFlow(): CreateClassFlowController {
     navigate(APP_ROUTES.teacherProfile);
   };
 
-  const goToCreatedClassOverview = () => {
+  const goToCreatedClassOverview = async () => {
     if (!createdClass) return;
-    const target = teacherOverviewPath(createdClass.classId);
+    let classId = createdClass.classId;
+    try {
+      const classes = await teacherClassesApi.getMine();
+      queryClient.setQueryData(teacherClassKeys.mine(), classes);
+      const matchingClass = classes.find((item) => item.classId === classId)
+        ?? classes.find((item) => item.className === createdClass.className);
+      classId = matchingClass?.classId ?? classId;
+    } catch {
+      // The newly-created class ID remains a valid navigation fallback.
+    }
+    const target = teacherOverviewPath(classId);
     clearCreateClassDraft();
     clearLastCreatedClass();
     clearLastCreatedInvitation();
     void queryClient.invalidateQueries({ queryKey: teacherClassKeys.mine() });
-    logger.info('navigate', { target, classId: createdClass.classId });
+    logger.info('navigate', { target, classId });
     navigate(target);
   };
 
